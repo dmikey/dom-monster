@@ -93,10 +93,6 @@
     if (browserName == "Netscape"){
 		jdropform.style.display = "hidden";
 	}
-	else
-	{
-		document.getElementById('jdropform').style.display='none';
-	}
 
     // add each param to the form as an input field
     for (var key in params) {
@@ -108,6 +104,14 @@
 
     // submit the form and cleanup
     document.body.appendChild(jdropform);
+	
+	 if (browserName != "Netscape"){
+		document.getElementById('jdropform').style.display='none';
+	}
+
+	
+	
+	
     jdropif.onload = function() { document.body.removeChild(jdropform); document.body.removeChild(jdropif); };
     jdropif.onerror = function() { document.body.removeChild(jdropform); document.body.removeChild(jdropif); };
     jdropform.submit();
