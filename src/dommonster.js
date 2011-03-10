@@ -73,7 +73,7 @@
       "title": document.title,
       "version": version,
       "summary": summary,
-      "json": JSON.stringify(myDataObj) };
+      "json": JSON.stringify(myDataObj).replace(/</gi, "&lt;").replace(/>/gi, "&gt;")};
 
     // hidden iframe to use as target of form submit
     var jdropif = document.createElement("iframe");
@@ -87,7 +87,16 @@
     jdropform.method = "post";
     jdropform.action = "http://jdrop.org/save";
     jdropform.target = "jdropiframe";
-    jdropform.style.display = "hidden";
+	jdropform.id = "jdropform";
+	jdropform.name = "jdropform";
+
+    if (browserName == "Netscape"){
+		jdropform.style.display = "hidden";
+	}
+	else
+	{
+		document.getElementById('jdropform').style.display='none';
+	}
 
     // add each param to the form as an input field
     for (var key in params) {
